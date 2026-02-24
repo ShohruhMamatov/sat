@@ -1,663 +1,548 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAT Zone — Maychilar Academiyasi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0f;
-            color: #e0e0e0;
-            overflow-x: hidden;
-            line-height: 1.7;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAT Zone — Academiya</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --may:        #FF6B2B;
+  --may-light:  #FFB347;
+  --may-glow:   rgba(255,107,43,0.35);
+  --may-soft:   rgba(255,107,43,0.10);
+  --jun:        #00C9FF;
+  --jun-light:  #4ECDC4;
+  --jun-glow:   rgba(0,201,255,0.35);
+  --jun-soft:   rgba(0,201,255,0.10);
+  --bg:         #060910;
+  --bg2:        #0C0F1C;
+  --bg3:        #111526;
+  --text:       #EBF0FF;
+  --muted:      #6A738E;
+  --muted2:     #9AA3BF;
+  --border:     rgba(255,255,255,0.07);
+  --border2:    rgba(255,255,255,0.13);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999}
 
-        /* ===== ANIMATED BACKGROUND ===== */
-        .bg-grid {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                linear-gradient(rgba(99, 102, 241, .04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99, 102, 241, .04) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-        }
-        .bg-glow {
-            position: fixed; z-index: 0; border-radius: 50%; filter: blur(120px);
-            pointer-events: none; animation: float 8s ease-in-out infinite alternate;
-        }
-        .bg-glow.one   { width: 600px; height: 600px; top: -10%; left: -10%; background: rgba(99,102,241,.15); }
-        .bg-glow.two   { width: 500px; height: 500px; bottom: -10%; right: -10%; background: rgba(236,72,153,.12); animation-delay: 2s; }
-        .bg-glow.three { width: 400px; height: 400px; top: 40%; left: 50%; background: rgba(16,185,129,.10); animation-delay: 4s; }
+/* BLOBS */
+.blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;animation:blobFloat 18s ease-in-out infinite}
+.blob-1{width:600px;height:600px;background:var(--may);top:-200px;left:-200px;animation-delay:0s}
+.blob-2{width:500px;height:500px;background:var(--jun);top:-150px;right:-200px;animation-delay:-6s}
+.blob-3{width:400px;height:400px;background:var(--may-light);bottom:100px;left:30%;opacity:.08;animation-delay:-12s}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,40px) scale(.97)}}
 
-        @keyframes float {
-            to { transform: translate(40px, -30px) scale(1.1); }
-        }
+.page{position:relative;z-index:1}
 
-        /* ===== UTILITY ===== */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-        .section { padding: 100px 0; }
-        .gradient-text {
-            background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .badge {
-            display: inline-block; padding: 6px 16px; border-radius: 999px;
-            font-size: .75rem; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
-            background: rgba(99,102,241,.15); color: #818cf8; border: 1px solid rgba(99,102,241,.25);
-        }
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(6,9,16,.7);position:sticky;top:0;z-index:100;animation:slideDown .7s ease both}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:6px 14px;border:1px solid var(--border2);border-radius:99px}
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 16px 0;
-            background: rgba(10,10,15,.7); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,.06);
-            transition: padding .3s, box-shadow .3s;
-        }
-        .navbar.scrolled { padding: 10px 0; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-        .navbar .container { display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
-        .logo span { color: #818cf8; }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a {
-            color: #a0a0b0; text-decoration: none; font-size: .9rem; font-weight: 500;
-            transition: color .25s; position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-            background: #818cf8; transition: width .3s;
-        }
-        .nav-links a:hover { color: #fff; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta {
-            padding: 10px 24px; border-radius: 12px; font-size: .85rem; font-weight: 600;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
-            text-decoration: none; border: none; cursor: pointer;
-            transition: transform .2s, box-shadow .2s;
-        }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(99,102,241,.4); }
+/* HERO */
+.hero{text-align:center;padding:100px 24px 80px;position:relative}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:7px 18px;border-radius:99px;margin-bottom:32px;animation:fadeUp .9s .1s ease both;backdrop-filter:blur(10px);background:rgba(255,255,255,.03)}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,160px);letter-spacing:6px;line-height:.88;animation:fadeUp .9s .2s ease both}
+.hero-title .line1{display:block;background:linear-gradient(135deg,var(--may) 0%,var(--may-light) 50%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title .line2{display:block;background:linear-gradient(135deg,#fff 0%,var(--jun) 50%,var(--jun-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--muted2);max-width:500px;margin:28px auto 0;line-height:1.7;animation:fadeUp .9s .35s ease both}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:56px;animation:fadeUp .9s .45s ease both}
+.stat{text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;line-height:1}
+.stat:nth-child(1) .stat-num{color:var(--may)}
+.stat:nth-child(2) .stat-num{color:var(--jun-light)}
+.stat:nth-child(3) .stat-num{color:var(--jun)}
+.stat-label{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.5px}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:72px;animation:fadeUp .9s .6s ease both}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--border2),transparent);animation:scrollPulse 2.5s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+.scroll-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-        /* hamburger */
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-        .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: .3s; }
+/* SECTION LABEL */
+.section-label{text-align:center;padding:0 24px 48px;animation:fadeUp .9s ease both}
+.section-label h2{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:5px;color:var(--muted);text-transform:uppercase}
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding-top: 80px; position: relative;
-        }
-        .hero-content { max-width: 780px; }
-        .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 900; line-height: 1.15;
-            margin-bottom: 24px;
-        }
-        .hero p { font-size: 1.15rem; color: #9ca3af; max-width: 600px; margin: 0 auto 40px; }
-        .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 56px; flex-wrap: wrap; }
-        .hero-stat h3 { font-size: 2.2rem; font-weight: 800; }
-        .hero-stat p { font-size: .85rem; color: #71717a; margin-top: 4px; }
+/* GROUPS */
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1360px;margin:0 auto;padding:0 28px 100px}
+@media(max-width:900px){.groups{grid-template-columns:1fr}}
 
-        /* Floating particles */
-        .particle {
-            position: absolute; border-radius: 50%; pointer-events: none;
-            animation: particleFloat 6s ease-in-out infinite;
-        }
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: .6; }
-            50%      { transform: translateY(-30px) scale(1.2); opacity: 1; }
-        }
+/* CARD */
+.group-card{background:var(--bg2);border-radius:28px;overflow:hidden;position:relative;border:1px solid var(--border);transition:border-color .4s ease,box-shadow .4s ease,transform .4s ease;cursor:default;transform-style:preserve-3d}
+.group-card.may{animation:cardReveal 1s .2s ease both}
+.group-card.jun{animation:cardReveal 1s .4s ease both}
+@keyframes cardReveal{from{opacity:0;transform:translateY(48px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.group-card.may:hover{border-color:rgba(255,107,43,.35);box-shadow:0 0 80px rgba(255,107,43,.12),0 40px 80px rgba(0,0,0,.4)}
+.group-card.jun:hover{border-color:rgba(0,201,255,.35);box-shadow:0 0 80px rgba(0,201,255,.12),0 40px 80px rgba(0,0,0,.4)}
 
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 16px 36px; border-radius: 14px; font-size: 1rem; font-weight: 700;
-            text-decoration: none; cursor: pointer; border: none;
-            transition: transform .25s, box-shadow .25s;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            color: #fff; box-shadow: 0 4px 24px rgba(99,102,241,.35);
-        }
-        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 36px rgba(99,102,241,.5); }
-        .btn-outline {
-            background: transparent; color: #c084fc;
-            border: 2px solid rgba(192,132,252,.3);
-        }
-        .btn-outline:hover { border-color: #c084fc; background: rgba(192,132,252,.08); transform: translateY(-3px); }
-        .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.card-topbar{height:4px;width:100%}
+.may .card-topbar{background:linear-gradient(90deg,var(--may),var(--may-light),var(--may));background-size:200%;animation:shimmer 3s linear infinite}
+.jun .card-topbar{background:linear-gradient(90deg,var(--jun),var(--jun-light),var(--jun));background-size:200%;animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 
-        /* Telegram Icon */
-        .tg-icon { width: 22px; height: 22px; }
+.card-orb{position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;filter:blur(60px);opacity:0;transition:opacity .6s ease;pointer-events:none}
+.may .card-orb{background:var(--may)}
+.jun .card-orb{background:var(--jun)}
+.group-card:hover .card-orb{opacity:.15}
 
-        /* ===== SECTION HEADERS ===== */
-        .section-header { text-align: center; margin-bottom: 64px; }
-        .section-header h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-top: 16px; }
-        .section-header p { color: #71717a; max-width: 540px; margin: 16px auto 0; font-size: 1rem; }
+/* CARD HEADER */
+.card-header{padding:36px 36px 24px;position:relative}
+.group-tag{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px;border:1px solid transparent}
+.may .group-tag{background:var(--may-soft);color:var(--may-light);border-color:rgba(255,107,43,.2)}
+.jun .group-tag{background:var(--jun-soft);color:var(--jun-light);border-color:rgba(0,201,255,.2)}
+.group-title{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:2px;line-height:.95;margin-bottom:10px}
+.may .group-title{color:var(--may)}
+.jun .group-title{color:var(--jun)}
+.group-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+.meta-icon{font-size:13px}
 
-        /* ===== FEATURE CARDS ===== */
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
-        }
-        .feature-card {
-            background: rgba(255,255,255,.03);
-            border: 1px solid rgba(255,255,255,.06);
-            border-radius: 20px; padding: 36px 32px;
-            transition: transform .35s, border-color .35s, box-shadow .35s;
-            position: relative; overflow: hidden;
-        }
-        .feature-card::before {
-            content: ''; position: absolute; inset: 0; border-radius: 20px;
-            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(99,102,241,.08), transparent 60%);
-            opacity: 0; transition: opacity .4s; pointer-events: none;
-        }
-        .feature-card:hover::before { opacity: 1; }
-        .feature-card:hover { transform: translateY(-6px); border-color: rgba(99,102,241,.25); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-        .feature-icon {
-            width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; margin-bottom: 20px;
-            background: linear-gradient(135deg, rgba(99,102,241,.15), rgba(168,85,247,.15));
-        }
-        .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: #f0f0f0; }
-        .feature-card p { font-size: .92rem; color: #9ca3af; line-height: 1.7; }
+/* SCORE CHIPS */
+.scores{display:flex;gap:10px;padding:0 36px 28px;flex-wrap:wrap}
+.score-chip{flex:1;min-width:80px;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:16px;padding:16px 14px;text-align:center;transition:all .35s ease;position:relative;overflow:hidden}
+.score-chip::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .35s ease}
+.may .score-chip::before{background:linear-gradient(135deg,var(--may-soft),transparent)}
+.jun .score-chip::before{background:linear-gradient(135deg,var(--jun-soft),transparent)}
+.score-chip:hover::before{opacity:1}
+.score-chip:hover{transform:translateY(-3px) scale(1.02);border-color:var(--border2)}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;position:relative;z-index:1}
+.may .score-num{color:var(--may)}
+.jun .score-num{color:var(--jun)}
+.score-label{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.4;position:relative;z-index:1}
 
-        /* ===== SCHEDULE ===== */
-        .schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .schedule-card {
-            background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-            border-radius: 20px; padding: 36px 32px; text-align: center;
-            transition: transform .35s, border-color .35s;
-        }
-        .schedule-card:hover { transform: translateY(-6px); border-color: rgba(236,72,153,.3); }
-        .schedule-time {
-            font-size: 2rem; font-weight: 800; margin: 16px 0 8px;
-            background: linear-gradient(135deg, #f472b6, #c084fc);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .schedule-label { color: #71717a; font-size: .9rem; }
-        .schedule-icon { font-size: 2.4rem; }
-        .schedule-days {
-            display: inline-block; margin-top: 12px; padding: 6px 16px; border-radius: 999px;
-            font-size: .78rem; font-weight: 600;
-            background: rgba(244,114,182,.1); color: #f472b6; border: 1px solid rgba(244,114,182,.2);
-        }
+/* CARD BODY */
+.card-body{padding:0 36px 36px}
+.section+.section{margin-top:26px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-icon{font-size:16px}
+.section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500}
+.may .section-title{color:var(--may-light)}
+.jun .section-title{color:var(--jun-light)}
+.section-line{flex:1;height:1px;background:var(--border)}
 
-        /* ===== PROCESS / STEPS ===== */
-        .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
-        .steps::before {
-            content: ''; position: absolute; left: 31px; top: 0; bottom: 0; width: 2px;
-            background: linear-gradient(to bottom, #6366f1, #a855f7, #ec4899);
-        }
-        .step {
-            display: flex; gap: 28px; align-items: flex-start; padding: 32px 0;
-            opacity: 0; transform: translateX(-30px);
-            transition: opacity .6s, transform .6s;
-        }
-        .step.visible { opacity: 1; transform: translateX(0); }
-        .step-num {
-            min-width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; font-weight: 800; position: relative; z-index: 2;
-            background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff;
-            box-shadow: 0 0 24px rgba(99,102,241,.4);
-        }
-        .step-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
-        .step-content p { font-size: .92rem; color: #9ca3af; }
+/* FEAT LIST */
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.feat-list li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;color:var(--muted2);align-items:flex-start;padding:8px 12px;border-radius:10px;transition:background .25s ease,color .25s ease,transform .25s ease;cursor:default}
+.feat-list li:hover{background:rgba(255,255,255,.04);color:var(--text);transform:translateX(4px)}
+.feat-list li .icon{font-size:15px;margin-top:1px;flex-shrink:0}
 
-        /* ===== PRICING ===== */
-        .pricing-card {
-            max-width: 520px; margin: 0 auto; text-align: center;
-            background: linear-gradient(145deg, rgba(99,102,241,.08), rgba(168,85,247,.06));
-            border: 1px solid rgba(99,102,241,.2); border-radius: 28px;
-            padding: 56px 48px; position: relative; overflow: hidden;
-        }
-        .pricing-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(from 180deg, transparent, rgba(99,102,241,.08), transparent 40%);
-            animation: priceSpin 6s linear infinite;
-        }
-        @keyframes priceSpin { to { transform: rotate(360deg); } }
-        .pricing-inner { position: relative; z-index: 1; }
-        .pricing-card .old-price { font-size: 1.1rem; color: #71717a; text-decoration: line-through; }
-        .pricing-card .price {
-            font-size: 3.5rem; font-weight: 900; margin: 12px 0 4px;
-            background: linear-gradient(135deg, #818cf8, #f472b6);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .pricing-card .price-note { color: #71717a; font-size: .85rem; margin-bottom: 36px; }
-        .pricing-features { list-style: none; text-align: left; margin-bottom: 40px; }
-        .pricing-features li {
-            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.05);
-            font-size: .95rem; display: flex; align-items: center; gap: 12px;
-        }
-        .pricing-features li::before {
-            content: '✓'; display: flex; align-items: center; justify-content: center;
-            min-width: 24px; height: 24px; border-radius: 50%;
-            background: rgba(16,185,129,.15); color: #10b981; font-size: .75rem; font-weight: 700;
-        }
+/* SCHEDULE */
+.schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sched-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;transition:all .3s ease}
+.sched-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s ease}
+.may .sched-card::after{background:var(--may)}
+.jun .sched-card::after{background:var(--jun)}
+.sched-card:hover::after{opacity:1}
+.sched-card:hover{transform:translateY(-3px);border-color:var(--border2)}
+.sched-time{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1}
+.may .sched-time{color:var(--may)}
+.jun .sched-time{color:var(--jun)}
+.sched-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
 
-        /* ===== CTA ===== */
-        .cta-section {
-            text-align: center; padding: 120px 0;
-            background: radial-gradient(ellipse at center, rgba(99,102,241,.06), transparent 70%);
-        }
-        .cta-section h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 20px; }
-        .cta-section p { color: #9ca3af; max-width: 520px; margin: 0 auto 40px; font-size: 1.05rem; }
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:2px}
+.tl-row{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;transition:background .25s ease,transform .25s ease;cursor:default}
+.tl-row:hover{background:rgba(255,255,255,.04);transform:translateX(4px)}
+.tl-badge{font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;letter-spacing:1px}
+.jun .tl-badge{background:var(--jun-soft);color:var(--jun);border:1px solid rgba(0,201,255,.2)}
+.tl-text{font-size:13px;color:var(--muted2)}
 
-        /* ===== FOOTER ===== */
-        .footer {
-            padding: 40px 0; text-align: center;
-            border-top: 1px solid rgba(255,255,255,.06);
-            color: #52525b; font-size: .85rem;
-        }
+/* CTA */
+.cta-block{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;transition:border-color .4s ease;margin-top:30px}
+.may .cta-block:hover{border-color:rgba(255,107,43,.3)}
+.jun .cta-block:hover{border-color:rgba(0,201,255,.3)}
+.cta-block::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:300px;height:120px;filter:blur(50px);opacity:.12;transition:opacity .4s ease;pointer-events:none}
+.may .cta-block::before{background:var(--may)}
+.jun .cta-block::before{background:var(--jun)}
+.cta-block:hover::before{opacity:.25}
+.price-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:4px}
+.price{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:1;position:relative;z-index:1}
+.may .price{color:var(--may)}
+.jun .price{color:var(--jun)}
+.price-currency{font-family:'DM Mono',monospace;font-size:16px;color:var(--muted);position:relative;z-index:1}
+.price-note{font-size:12px;color:var(--muted);margin-bottom:22px;position:relative;z-index:1}
 
-        /* ===== SCROLL REVEAL ===== */
-        .reveal {
-            opacity: 0; transform: translateY(40px);
-            transition: opacity .7s ease, transform .7s ease;
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+/* CTA BUTTON */
+.cta-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;padding:16px 36px;border-radius:99px;letter-spacing:.3px;position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;z-index:1}
+.cta-btn .btn-text{position:relative;z-index:2}
+.cta-btn .btn-icon{position:relative;z-index:2;font-size:18px;transition:transform .3s ease}
+.cta-btn:hover .btn-icon{transform:translateX(4px) rotate(10deg)}
+.cta-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s ease;border-radius:inherit}
+.cta-btn:hover::before{opacity:1}
+.may .cta-btn{background:linear-gradient(135deg,var(--may),var(--may-light));color:#fff;box-shadow:0 4px 28px rgba(255,107,43,.35)}
+.may .cta-btn::before{background:linear-gradient(135deg,var(--may-light),var(--may))}
+.may .cta-btn:hover{box-shadow:0 8px 50px rgba(255,107,43,.55);transform:scale(1.04)}
+.jun .cta-btn{background:linear-gradient(135deg,var(--jun),var(--jun-light));color:#06090f;box-shadow:0 4px 28px rgba(0,201,255,.35)}
+.jun .cta-btn::before{background:linear-gradient(135deg,var(--jun-light),var(--jun))}
+.jun .cta-btn:hover{box-shadow:0 8px 50px rgba(0,201,255,.55);transform:scale(1.04)}
+.cta-btn:active{transform:scale(.98) !important}
+.cta-sub{display:block;font-size:11px;color:var(--muted);margin-top:12px;position:relative;z-index:1}
 
-        /* ===== COUNTER ANIMATION ===== */
-        .count-up { display: inline-block; }
+/* FOOTER */
+.footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);position:relative}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:6px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.footer-copy{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
+.footer-copy a{color:var(--muted2);text-decoration:none;transition:color .2s}
+.footer-copy a:hover{color:var(--text)}
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .nav-links.open {
-                display: flex; flex-direction: column;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: rgba(10,10,15,.95); backdrop-filter: blur(20px);
-                padding: 24px; gap: 20px; border-bottom: 1px solid rgba(255,255,255,.06);
-            }
-            .hero-stats { gap: 28px; }
-            .pricing-card { padding: 40px 28px; }
-            .steps::before { left: 23px; }
-            .step-num { min-width: 48px; height: 48px; font-size: 1rem; }
-        }
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-        /* ===== PULSE ===== */
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,.5); }
-            50%       { box-shadow: 0 0 0 14px rgba(99,102,241,0); }
-        }
-        .pulse { animation: pulse 2s infinite; }
-
-        /* ===== TOOLTIP STYLE RIBBON ===== */
-        .ribbon {
-            position: absolute; top: 20px; right: -35px;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            color: #fff; font-size: .7rem; font-weight: 700; text-transform: uppercase;
-            padding: 6px 40px; transform: rotate(45deg);
-            letter-spacing: 1px;
-        }
-
-        /* ===== MARQUEE ===== */
-        .marquee-wrap { overflow: hidden; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.04); margin: 60px 0; }
-        .marquee {
-            display: flex; gap: 60px; white-space: nowrap;
-            animation: marquee 20s linear infinite;
-        }
-        .marquee span { font-size: 1rem; font-weight: 600; color: #3f3f46; }
-        @keyframes marquee {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-    </style>
+/* RESPONSIVE */
+@media(max-width:600px){
+  .nav{padding:18px 20px}
+  .nav-badge{display:none}
+  .hero-stats{gap:24px}
+  .card-header,.card-body{padding-left:22px;padding-right:22px}
+  .scores{padding-left:22px;padding-right:22px}
+  .group-title{font-size:40px}
+  .schedule-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<!-- Animated BG -->
-<div class="bg-grid"></div>
-<div class="bg-glow one"></div>
-<div class="bg-glow two"></div>
-<div class="bg-glow three"></div>
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-    <div class="container">
-        <div class="logo">SAT<span>Zone</span></div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">Kurs haqida</a></li>
-            <li><a href="#features">Imkoniyatlar</a></li>
-            <li><a href="#schedule">Jadval</a></li>
-            <li><a href="#process">Jarayon</a></li>
-            <li><a href="#pricing">Narx</a></li>
-        </ul>
-        <a href="https://t.me/satzone_admini?text=Assalomu%20alaykum!%20SAT%20Zone%20kursiga%20yozilmoqchiman.%20Batafsil%20ma'lumot%20bera%20olasizmi%3F" target="_blank" class="nav-cta">Qo'shilish</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
+<div class="page">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">SAT ZONE</div>
+  <div class="nav-badge">2025 · Academiya</div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-    <!-- decorative particles -->
-    <div class="particle" style="width:6px;height:6px;background:#818cf8;top:20%;left:15%;animation-delay:0s;"></div>
-    <div class="particle" style="width:4px;height:4px;background:#f472b6;top:35%;right:20%;animation-delay:1s;"></div>
-    <div class="particle" style="width:8px;height:8px;background:#10b981;bottom:30%;left:25%;animation-delay:2s;"></div>
-    <div class="particle" style="width:5px;height:5px;background:#c084fc;top:60%;right:12%;animation-delay:3s;"></div>
-
-    <div class="container">
-        <div class="hero-content reveal">
-            <div class="badge">📚 Maychilar Academiyasi — 2-May</div>
-            <h1 style="margin-top: 24px;">
-                SAT imtihonida <span class="gradient-text">1200+ ball</span> oling va Grantga ega bo'ling
-            </h1>
-            <p>Davlat universitetlarida grant asosida o'qish yoki Yangi O'zbekiston Universitetiga 780+ ball bilan kirish — barchasi bitta kursda!</p>
-            <div class="btn-group">
-                <a href="https://t.me/satzone_admini?text=Assalomu%20alaykum!%20SAT%20Zone%20kursiga%20yozilmoqchiman.%20Batafsil%20ma'lumot%20bera%20olasizmi%3F" target="_blank" class="btn btn-primary pulse">
-                    <svg class="tg-icon" viewBox="0 0 24 24" fill="none"><path d="M21.2 4.4L2.4 10.7c-.6.2-.6.9 0 1.1l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5.1 3.7c.4.3 1 .1 1.1-.4L22.1 5.3c.2-.7-.4-1.2-.9-1z" fill="currentColor"/></svg>
-                    Hozir qo'shilish
-                </a>
-                <a href="#features" class="btn btn-outline">Batafsil →</a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <h3 class="gradient-text count-up" data-target="1200">0</h3>
-                    <p>Maqsad ball</p>
-                </div>
-                <div class="hero-stat">
-                    <h3 class="gradient-text count-up" data-target="800">0</h3>
-                    <p>Kunlik test bali</p>
-                </div>
-                <div class="hero-stat">
-                    <h3 class="gradient-text count-up" data-target="3">0</h3>
-                    <p>Support teacher</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    Ro'yxatdan o'tish ochiq
+  </div>
+  <h1 class="hero-title">
+    <span class="line1">SAT</span>
+    <span class="line2">ZONE</span>
+  </h1>
+  <p class="hero-sub">O'zbekistondagi eng yaxshi SAT tayyorlov markazida grant va ustama uchun o'z o'rningizni band qiling.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="c1">1200+</div><div class="stat-label">Grand ball</div></div>
+    <div class="stat"><div class="stat-num" id="c2">700+</div><div class="stat-label">Math ustama</div></div>
+    <div class="stat"><div class="stat-num" id="c3">36</div><div class="stat-label">Oy ustama</div></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">Pastga</div>
+  </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-    <div class="marquee">
-        <span>📘 SAT Matematika</span>
-        <span>🎯 1200+ Ball</span>
-        <span>🏫 Davlat Universitetlari</span>
-        <span>🏆 Grant asosida</span>
-        <span>📊 Kunlik testlar</span>
-        <span>👨‍🏫 3 ta Support Teacher</span>
-        <span>🤖 Bot nazorati</span>
-        <span>🎓 Yangi O'zbekiston Universiteti</span>
-        <span>📘 SAT Matematika</span>
-        <span>🎯 1200+ Ball</span>
-        <span>🏫 Davlat Universitetlari</span>
-        <span>🏆 Grant asosida</span>
-        <span>📊 Kunlik testlar</span>
-        <span>👨‍🏫 3 ta Support Teacher</span>
-        <span>🤖 Bot nazorati</span>
-        <span>🎓 Yangi O'zbekiston Universiteti</span>
-    </div>
-</div>
+<div class="section-label reveal"><h2>Guruhingizni tanlang</h2></div>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-    <div class="container">
-        <div class="section-header reveal">
-            <div class="badge">Kim uchun?</div>
-            <h2>Kurs <span class="gradient-text">kimlar uchun</span> mos?</h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card reveal">
-                <div class="feature-icon">👨‍🏫</div>
-                <h3>Ustozlar uchun</h3>
-                <p>SAT topshirib <strong>1200+</strong> balldan yuqori olib davlat universitetlarida grant asosida o'qishni xohlaganlar va matematika qismini <strong>700+</strong> balldan oshirib <strong>36 oy</strong> davomida <strong>50% ustama</strong> asosida ishlashni xohlaganlar uchun.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">🎓</div>
-                <h3>O'quvchilar uchun</h3>
-                <p>SAT dan <strong>780+</strong> ball olib <strong>Yangi O'zbekiston Universitetiga</strong> grant asosida kirmoqchi bo'lgan o'quvchilar uchun to'liq tayyorgarlik kursi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">📅</div>
-                <h3>2-May — SAT sanasi</h3>
-                <p>Maychilar academiyasi 2-may SAT imtihoniga tayyorgarlik ko'ruvchilar uchun maxsus tashkil etilgan intensiv dastur.</p>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- GROUPS -->
+<div class="groups">
 
-<!-- FEATURES -->
-<section class="section" id="features" style="background: rgba(255,255,255,.01);">
-    <div class="container">
-        <div class="section-header reveal">
-            <div class="badge">Kurs tarkibi</div>
-            <h2>Kurs davomida <span class="gradient-text">nimalar o'rganasiz?</span></h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card reveal">
-                <div class="feature-icon">🧮</div>
-                <h3>Matematika — oson yo'llar</h3>
-                <p>Ustozlarga ingliz tilisiz misollarni oson tushunish va tezroq ishlash yo'llari o'rgatiladi. Kerakli kalit so'zlar berib boriladi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">📝</div>
-                <h3>Kunlik 800 ballik testlar</h3>
-                <p>Har kuni 800 ballik sistemada testlar beriladi, har biri imtihon bilan 1 ga 1 tuzilgan. Har kuni natijalar analiz qilinadi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">🧩</div>
-                <h3>Quizlar va kalit so'zlar</h3>
-                <p>Kerakli kalit so'zlar berib boriladi va tushunishni tekshirish uchun quizlar tashkil qilinadi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">🤖</div>
-                <h3>Bot orqali nazorat</h3>
-                <p>Vazifalar botiga har kuni vazifa tashlashingiz kerak. Bu qattiq nazorat qilinadi — hech bir kun o'tkazib yuborilmaydi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">👥</div>
-                <h3>3 ta Support Teacher</h3>
-                <p>Kurs davomida sizni 3 ta support teacher nazorat qiladi. Har kunlik vazifa qilinganligi tekshirilib boriladi.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon">📑</div>
-                <h3>Akkount & Ro'yxatdan o'tish</h3>
-                <p>O'quvchilarga akkount ochib berish va SAT ga ro'yxatdan o'tkazish xizmati kurs ichiga kiradi.</p>
-            </div>
-        </div>
+  <!-- MAY -->
+  <div class="group-card may reveal">
+    <div class="card-orb"></div>
+    <div class="card-topbar"></div>
+    <div class="card-header">
+      <div class="group-tag">📅 2-May · Imtihon</div>
+      <div class="group-title">MAYCHILAR<br>ACADEMIYASI</div>
+      <div class="group-meta">
+        <div class="meta-item"><span class="meta-icon">🌙</span> 19:00 kechki</div>
+        <div class="meta-item"><span class="meta-icon">🌅</span> 05:15 ertalabki</div>
+        <div class="meta-item"><span class="meta-icon">📆</span> Dush–Juma</div>
+      </div>
     </div>
-</section>
+    <div class="scores">
+      <div class="score-chip"><div class="score-num">1200+</div><div class="score-label">Umumiy<br>Grand ball</div></div>
+      <div class="score-chip"><div class="score-num">700+</div><div class="score-label">Math<br>50% ustama</div></div>
+      <div class="score-chip"><div class="score-num">780+</div><div class="score-label">YaNUU<br>Grand</div></div>
+    </div>
+    <div class="card-body">
 
-<!-- SCHEDULE -->
-<section class="section" id="schedule">
-    <div class="container">
-        <div class="section-header reveal">
-            <div class="badge">Jadval</div>
-            <h2>Dars <span class="gradient-text">jadvali</span></h2>
-            <p>Dushanba — Juma kunlari ikki vaqtda darslar olib boriladi</p>
-        </div>
+      <div class="section">
+        <div class="section-head"><span class="section-icon">🎯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">▸</span>2-mayda SAT topshirib 1200+ olib davlat universitetlarida grant asosida o'qishni istagan barcha</li>
+          <li><span class="icon">▸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
+          <li><span class="icon">▸</span>780+ olib Yangi O'zbekiston Universitetiga Grant bilan kirmoqchi bo'lgan o'quvchilar</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">📚</span><div class="section-title">Kurs davomida</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">✦</span>Matematikani ingliz tilisiz tez va oson tushunish yo'llari o'rgatiladi</li>
+          <li><span class="icon">✦</span>Kerakli kalit so'zlar beriladi — muntazam quizlar tashkil etiladi</li>
+          <li><span class="icon">✦</span>Har kuni 800 ballik tizimda testlar + kunlik batafsil analiz</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">📦</span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">✓</span>Shaxsiy akkount ochib berish + SAT rasmiy ro'yxati</li>
+          <li><span class="icon">✓</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
+          <li><span class="icon">✓</span>1200+ olgandan so'ng Agentlikka sertifikat — DTMsiz GRAND yutish</li>
+          <li><span class="icon">✓</span>3 ta support teacher — har kunlik nazorat va vazifa tekshiruvi</li>
+          <li><span class="icon">✓</span>Vazifalar botiga kunlik topshiriq — qattiq nazorat ostida</li>
+          <li><span class="icon">✓</span>Har kuni 800 ballik testlar (haqiqiy imtihon bilan 1:1)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">🕐</span><div class="section-title">Dars jadvali</div><div class="section-line"></div></div>
         <div class="schedule-grid">
-            <div class="schedule-card reveal">
-                <div class="schedule-icon">🌅</div>
-                <div class="schedule-time">5:15</div>
-                <div class="schedule-label">Saharda</div>
-                <div class="schedule-days">Dushanba — Juma</div>
-            </div>
-            <div class="schedule-card reveal">
-                <div class="schedule-icon">🌆</div>
-                <div class="schedule-time">19:00</div>
-                <div class="schedule-label">Kechqurun</div>
-                <div class="schedule-days">Dushanba — Juma</div>
-            </div>
+          <div class="sched-card"><div class="sched-time">19:00</div><div class="sched-desc">Kechki dars<br>Dush — Juma</div></div>
+          <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki dars<br>Dush — Juma</div></div>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- PROCESS -->
-<section class="section" id="process" style="background: rgba(255,255,255,.01);">
-    <div class="container">
-        <div class="section-header reveal">
-            <div class="badge">Jarayon</div>
-            <h2>Kurs <span class="gradient-text">bosqichlari</span></h2>
-        </div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-content">
-                    <h3>Akkount ochish va ro'yxatdan o'tish</h3>
-                    <p>O'quvchilarga akkount ochib beriladi va SAT imtihoniga rasmiy ro'yxatdan o'tkaziladi.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-content">
-                    <h3>Intensiv tayyorgarlik</h3>
-                    <p>Har kuni 800 ballik testlar ishlaysiz, natijalar analiz qilinadi, support teacherlar nazorat qiladi.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-content">
-                    <h3>700+ ball — Vazirlikka jo'natish</h3>
-                    <p>Matematikadan 700+ ball chiqsa, vazirlikka jo'natib beriladi va ERP orqali ustama tasdiqlatishga yordam beriladi.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-content">
-                    <h3>1200+ ball — Agentlikka sertifikat</h3>
-                    <p>O'quvchilar 1200+ olgandan keyin Agentlikka sertifikatni jo'natib haqiqiyligini tasdiqlatamiz.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">5</div>
-                <div class="step-content">
-                    <h3>DTM siz — GRANT yutish!</h3>
-                    <p>DTM siz GRANT yutishingizga yordam beramiz. Davlat universitetlarida grant asosida o'qishni boshlaysiz!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- PRICING -->
-<section class="section" id="pricing">
-    <div class="container">
-        <div class="section-header reveal">
-            <div class="badge">💰 Maxsus narx</div>
-            <h2>Kurs <span class="gradient-text">narxi</span></h2>
-            <p>Hoziroq qo'shilsangiz maxsus chegirma!</p>
-        </div>
-        <div class="pricing-card reveal">
-            <div class="ribbon">Chegirma!</div>
-            <div class="pricing-inner">
-                <div class="price">329 000</div>
-                <div class="price-note">so'm / kurs uchun</div>
-                <ul class="pricing-features">
-                    <li>Akkount ochib berish</li>
-                    <li>SAT ga ro'yxatdan o'tkazish</li>
-                    <li>Har kunlik 800 ballik testlar</li>
-                    <li>3 ta Support Teacher nazorati</li>
-                    <li>Bot orqali vazifa nazorati</li>
-                    <li>Kalit so'zlar va quizlar</li>
-                    <li>Vazirlik va ERP yordam</li>
-                    <li>Agentlikka sertifikat jo'natish</li>
-                    <li>DTM siz GRANT yutish yordami</li>
-                </ul>
-                <a href="https://t.me/satzone_admini?text=Assalomu%20alaykum!%20SAT%20Zone%20kursiga%20yozilmoqchiman.%20Kurs%20narxi%20329%2C000%20so'm%20ekan.%20Batafsil%20ma'lumot%20bera%20olasizmi%3F" target="_blank" class="btn btn-primary pulse" style="width: 100%; justify-content: center;">
-                    <svg class="tg-icon" viewBox="0 0 24 24" fill="none"><path d="M21.2 4.4L2.4 10.7c-.6.2-.6.9 0 1.1l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5.1 3.7c.4.3 1 .1 1.1-.4L22.1 5.3c.2-.7-.4-1.2-.9-1z" fill="currentColor"/></svg>
-                    Hozir qo'shilish — @satzone_admini
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="cta-section" id="cta">
-    <div class="container reveal">
-        <h2>SAT bilan kelajagingizni <span class="gradient-text">o'zgartiring!</span></h2>
-        <p>1200+ ball oling, DTM siz universitetga kiring va grant asosida o'qishni boshlang.</p>
-        <a href="https://t.me/satzone_admini?text=Assalomu%20alaykum!%20SAT%20Zone%20kursiga%20qo'shilmoqchiman!%20%F0%9F%8E%AF" target="_blank" class="btn btn-primary pulse" style="font-size:1.1rem; padding: 20px 48px;">
-            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" style="width:26px;height:26px;"><path d="M21.2 4.4L2.4 10.7c-.6.2-.6.9 0 1.1l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5.1 3.7c.4.3 1 .1 1.1-.4L22.1 5.3c.2-.7-.4-1.2-.9-1z" fill="currentColor"/></svg>
-            Telegramda yozing
+      <div class="cta-block">
+        <div class="price-row"><div class="price">329.000</div><div class="price-currency">so'm</div></div>
+        <div class="price-note">Hoziroq qo'shilsangiz — maxsus narx</div>
+        <a class="cta-btn"
+           href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%94%B6%20Maychilar%20Academiyasiga%20(2-May%20SAT)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
+           target="_blank" rel="noopener">
+          <span class="btn-text">Qo'shilish — Maychilar</span>
+          <span class="btn-icon">✈</span>
         </a>
+        <span class="cta-sub">@satzone_admini · Telegram orqali</span>
+      </div>
+
     </div>
-</section>
+  </div>
+
+  <!-- JUNE -->
+  <div class="group-card jun reveal">
+    <div class="card-orb"></div>
+    <div class="card-topbar"></div>
+    <div class="card-header">
+      <div class="group-tag">📅 6-Iyun · Imtihon</div>
+      <div class="group-title">IYUNCHILAR<br>ACADEMIYASI</div>
+      <div class="group-meta">
+        <div class="meta-item"><span class="meta-icon">🌙</span> 21:00 kechki</div>
+        <div class="meta-item"><span class="meta-icon">🌅</span> 05:15 ertalabki</div>
+        <div class="meta-item"><span class="meta-icon">📆</span> Dush–Juma</div>
+      </div>
+    </div>
+    <div class="scores">
+      <div class="score-chip"><div class="score-num">1200+</div><div class="score-label">Umumiy<br>Grand ball</div></div>
+      <div class="score-chip"><div class="score-num">700+</div><div class="score-label">Math<br>50% ustama</div></div>
+      <div class="score-chip"><div class="score-num">36 oy</div><div class="score-label">Ustama<br>muddati</div></div>
+    </div>
+    <div class="card-body">
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">🎯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">▸</span>6-iyunda SAT topshirib 1200+ olib universitetlarga grant bilan kirmoqchi bo'lgan barcha</li>
+          <li><span class="icon">▸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">➗</span><div class="section-title">Matematika bo'limi</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">✦</span>Ingliz tilisiz misollarni tushunish qobiliyatini rivojlantirish</li>
+          <li><span class="icon">✦</span>Kalit so'zlar va atamalar — quizlar orqali mustahkam yodlatiladi</li>
+          <li><span class="icon">✦</span>Matematikasi pastroq o'quvchilarga qo'shimcha ustozlar biriktiriladi</li>
+          <li><span class="icon">✦</span>6-iyungacha ehtimoli baland testlar — oson va tez usullar bilan</li>
+          <li><span class="icon">✦</span>Har bir test 800 ballik tizimda baholanadi</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">📝</span><div class="section-title">English bo'limi</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">✦</span>1-oy: Writing savollarini 100% to'g'ri ishlash sirlari o'rgatiladi</li>
+          <li><span class="icon">✦</span>Qolgan oylar: Reading bo'limi va Mock test sessiyalari</li>
+          <li><span class="icon">✦</span>Har bir o'quvchi bilan individual ishlash — xatolar chuqur tahlil qilinadi</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">🗺</span><div class="section-title">O'quv rejasi</div><div class="section-line"></div></div>
+        <div class="timeline">
+          <div class="tl-row"><div class="tl-badge">1-OY</div><div class="tl-text">To'liq Algebra bo'limi</div></div>
+          <div class="tl-row"><div class="tl-badge">2-OY · 1-HAFTA</div><div class="tl-text">Geometry bo'limi</div></div>
+          <div class="tl-row"><div class="tl-badge">2-OY · 2-HAFTA</div><div class="tl-text">Problem Solving & Data Analysis</div></div>
+          <div class="tl-row"><div class="tl-badge">YAKUNIY</div><div class="tl-text">Mock testlar · Reading · Imtihon tayyorgarligi</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">📦</span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
+        <ul class="feat-list">
+          <li><span class="icon">✓</span>Shaxsiy akkount ochib berish + SAT rasmiy ro'yxati</li>
+          <li><span class="icon">✓</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
+          <li><span class="icon">✓</span>1200+ olgandan so'ng Agentlikka sertifikat — DTMsiz GRAND yutish</li>
+          <li><span class="icon">✓</span>3 ta support teacher — har kunlik nazorat, vazifa tekshiruvi</li>
+          <li><span class="icon">✓</span>Vazifalar botiga kunlik topshiriq — qattiq nazorat</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><span class="section-icon">🕐</span><div class="section-title">Dars jadvali</div><div class="section-line"></div></div>
+        <div class="schedule-grid">
+          <div class="sched-card"><div class="sched-time">21:00</div><div class="sched-desc">Kechki dars<br>Dush — Juma</div></div>
+          <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki dars<br>Dush — Juma</div></div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--jun-light);text-transform:uppercase;margin-bottom:14px;opacity:0.8">2.5 oylik kurs · Bir martalik to'lov</div>
+        <div class="price-row">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);text-decoration:line-through;letter-spacing:2px;line-height:1;position:relative;z-index:1">599.000</div>
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);position:relative;z-index:1">so'm</div>
+        </div>
+        <div class="price-row" style="margin-top:4px">
+          <div class="price">497.000</div>
+          <div class="price-currency">so'm</div>
+        </div>
+        <div class="price-note">🔥 Hozir o'tsangiz — 102.000 so'm tejaysiz</div>
+        <a class="cta-btn"
+           href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%94%B5%20Iyunchilar%20Academiyasiga%20(6-Iyun%20SAT)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
+           target="_blank" rel="noopener">
+          <span class="btn-text">Qo'shilish — Iyunchilar</span>
+          <span class="btn-icon">✈</span>
+        </a>
+        <span class="cta-sub">@satzone_admini · Telegram orqali</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
-    <div class="container">
-        <p style="margin-bottom: 8px;"><strong style="color:#818cf8;">SAT</strong><strong>Zone</strong> — Maychilar Academiyasi</p>
-        <p>© 2026 SAT Zone. Barcha huquqlar himoyalangan.</p>
-    </div>
+  <div class="footer-logo">SAT ZONE</div>
+  <p class="footer-copy">© 2025 SAT Zone Academiya · <a href="https://t.me/satzone_admini" target="_blank">@satzone_admini</a></p>
 </footer>
 
+</div>
+
 <script>
-    // ===== NAVBAR SCROLL =====
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+      const idx = siblings.indexOf(e.target);
+      e.target.style.transitionDelay = (idx * 0.12) + 's';
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+
+// 3D tilt on cards
+document.querySelectorAll('.group-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `translateY(-6px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+    card.style.transition = 'transform 0.1s ease';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease';
+  });
+});
+
+// Counter animation
+function counter(el, target, dur, suffix) {
+  let start, isInt = Number.isInteger(target);
+  const tick = ts => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      counter(document.getElementById('c1'), 1200, 1400, '+');
+      counter(document.getElementById('c2'), 700, 1200, '+');
+      counter(document.getElementById('c3'), 36, 900, '');
+      statsObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+statsObs.observe(document.querySelector('.hero-stats'));
+
+// Ripple effect on CTA buttons
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes rippleAnim{to{transform:scale(1);opacity:0}}`;
+document.head.appendChild(rippleStyle);
+
+document.querySelectorAll('.cta-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const r = this.getBoundingClientRect();
+    const size = Math.max(r.width, r.height) * 2;
+    const span = document.createElement('span');
+    span.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${e.clientX - r.left - size/2}px;top:${e.clientY - r.top - size/2}px;background:rgba(255,255,255,.25);border-radius:50%;transform:scale(0);animation:rippleAnim .6s ease-out forwards;pointer-events:none;z-index:0`;
+    this.appendChild(span);
+    setTimeout(() => span.remove(), 700);
+  });
+});
+
+// Floating particles on hero
+(function(){
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.4';
+  document.querySelector('.blobs').appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let W, H, pts = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for (let i = 0; i < 55; i++) {
+    pts.push({
+      x: Math.random()*1920, y: Math.random()*1080,
+      vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3,
+      r: Math.random()*1.5+.5,
+      c: Math.random() > 0.5 ? 'rgba(255,107,43,' : 'rgba(0,201,255,'
     });
-
-    // ===== HAMBURGER =====
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.c + '0.7)';
+      ctx.fill();
     });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-    // ===== SCROLL REVEAL =====
-    const revealEls = document.querySelectorAll('.reveal, .step');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('visible'), i * 80);
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: .15 });
-    revealEls.forEach(el => revealObserver.observe(el));
-
-    // ===== COUNTER ANIMATION =====
-    const counters = document.querySelectorAll('.count-up');
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const el = entry.target;
-            const target = +el.dataset.target;
-            const duration = 1800;
-            const start = performance.now();
-            const tick = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.floor(ease * target) + (target > 10 ? '+' : '');
-                if (progress < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-            counterObserver.unobserve(el);
-        });
-    }, { threshold: .5 });
-    counters.forEach(c => counterObserver.observe(c));
-
-    // ===== CARD GLOW FOLLOW =====
-    document.querySelectorAll('.feature-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-            card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-        });
-    });
-
-    // ===== SMOOTH ANCHOR =====
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
-
 </body>
 </html>
