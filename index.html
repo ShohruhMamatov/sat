@@ -2,16 +2,15 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="./image.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAT Zone — Academiya</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --may:        #FF6B2B;
-  --may-light:  #FFB347;
-  --may-glow:   rgba(255,107,43,0.35);
-  --may-soft:   rgba(255,107,43,0.10);
+  --fnd:        #F7C948;
+  --fnd-light:  #FFE07A;
+  --fnd-glow:   rgba(247,201,72,0.35);
+  --fnd-soft:   rgba(247,201,72,0.10);
   --jun:        #00C9FF;
   --jun-light:  #4ECDC4;
   --jun-glow:   rgba(0,201,255,0.35);
@@ -33,35 +32,32 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999}
 
-/* BLOBS */
 .blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;animation:blobFloat 18s ease-in-out infinite}
-.blob-1{width:600px;height:600px;background:var(--may);top:-200px;left:-200px;animation-delay:0s}
+.blob-1{width:600px;height:600px;background:var(--fnd);top:-200px;left:-200px;animation-delay:0s}
 .blob-2{width:500px;height:500px;background:var(--jun);top:-150px;right:-200px;animation-delay:-6s}
-.blob-3{width:400px;height:400px;background:var(--may-light);bottom:100px;left:30%;opacity:.08;animation-delay:-12s}
+.blob-3{width:400px;height:400px;background:var(--fnd-light);bottom:100px;left:30%;opacity:.08;animation-delay:-12s}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,40px) scale(.97)}}
 
 .page{position:relative;z-index:1}
 
-/* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(6,9,16,.7);position:sticky;top:0;z-index:100;animation:slideDown .7s ease both}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,var(--fnd),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:6px 14px;border:1px solid var(--border2);border-radius:99px}
 
-/* HERO */
 .hero{text-align:center;padding:100px 24px 80px;position:relative}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:7px 18px;border-radius:99px;margin-bottom:32px;animation:fadeUp .9s .1s ease both;backdrop-filter:blur(10px);background:rgba(255,255,255,.03)}
 .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,160px);letter-spacing:6px;line-height:.88;animation:fadeUp .9s .2s ease both}
-.hero-title .line1{display:block;background:linear-gradient(135deg,var(--may) 0%,var(--may-light) 50%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title .line1{display:block;background:linear-gradient(135deg,var(--fnd) 0%,var(--fnd-light) 50%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-title .line2{display:block;background:linear-gradient(135deg,#fff 0%,var(--jun) 50%,var(--jun-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:16px;color:var(--muted2);max-width:500px;margin:28px auto 0;line-height:1.7;animation:fadeUp .9s .35s ease both}
 .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:56px;animation:fadeUp .9s .45s ease both}
 .stat{text-align:center}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;line-height:1}
-.stat:nth-child(1) .stat-num{color:var(--may)}
+.stat:nth-child(1) .stat-num{color:var(--fnd)}
 .stat:nth-child(2) .stat-num{color:var(--jun-light)}
 .stat:nth-child(3) .stat-num{color:var(--jun)}
 .stat-label{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.5px}
@@ -71,137 +67,107 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .scroll-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-/* SECTION LABEL */
 .section-label{text-align:center;padding:0 24px 48px;animation:fadeUp .9s ease both}
 .section-label h2{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:5px;color:var(--muted);text-transform:uppercase}
 
-/* GROUPS */
-.groups{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1360px;margin:0 auto;padding:0 28px 100px}
-@media(max-width:900px){.groups{grid-template-columns:1fr}}
+.groups{display:grid;grid-template-columns:1fr;gap:20px;max-width:780px;margin:0 auto;padding:0 28px 100px}
 
-/* CARD */
 .group-card{background:var(--bg2);border-radius:28px;overflow:hidden;position:relative;border:1px solid var(--border);transition:border-color .4s ease,box-shadow .4s ease,transform .4s ease;cursor:default;transform-style:preserve-3d}
-.group-card.may{animation:cardReveal 1s .2s ease both}
-.group-card.jun{animation:cardReveal 1s .4s ease both}
+.group-card.fnd{animation:cardReveal 1s .2s ease both}
 @keyframes cardReveal{from{opacity:0;transform:translateY(48px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.group-card.may:hover{border-color:rgba(255,107,43,.35);box-shadow:0 0 80px rgba(255,107,43,.12),0 40px 80px rgba(0,0,0,.4)}
-.group-card.jun:hover{border-color:rgba(0,201,255,.35);box-shadow:0 0 80px rgba(0,201,255,.12),0 40px 80px rgba(0,0,0,.4)}
+.group-card.fnd:hover{border-color:rgba(247,201,72,.35);box-shadow:0 0 80px rgba(247,201,72,.12),0 40px 80px rgba(0,0,0,.4)}
 
 .card-topbar{height:4px;width:100%}
-.may .card-topbar{background:linear-gradient(90deg,var(--may),var(--may-light),var(--may));background-size:200%;animation:shimmer 3s linear infinite}
-.jun .card-topbar{background:linear-gradient(90deg,var(--jun),var(--jun-light),var(--jun));background-size:200%;animation:shimmer 3s linear infinite}
+.fnd .card-topbar{background:linear-gradient(90deg,var(--fnd),var(--fnd-light),var(--fnd));background-size:200%;animation:shimmer 3s linear infinite}
 @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 
 .card-orb{position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;filter:blur(60px);opacity:0;transition:opacity .6s ease;pointer-events:none}
-.may .card-orb{background:var(--may)}
-.jun .card-orb{background:var(--jun)}
+.fnd .card-orb{background:var(--fnd)}
 .group-card:hover .card-orb{opacity:.15}
 
-/* CARD HEADER */
 .card-header{padding:36px 36px 24px;position:relative}
 .group-tag{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px;border:1px solid transparent}
-.may .group-tag{background:var(--may-soft);color:var(--may-light);border-color:rgba(255,107,43,.2)}
-.jun .group-tag{background:var(--jun-soft);color:var(--jun-light);border-color:rgba(0,201,255,.2)}
+.fnd .group-tag{background:var(--fnd-soft);color:var(--fnd-light);border-color:rgba(247,201,72,.2)}
 .group-title{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:2px;line-height:.95;margin-bottom:10px}
-.may .group-title{color:var(--may)}
-.jun .group-title{color:var(--jun)}
+.fnd .group-title{color:var(--fnd)}
 .group-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .meta-item{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
 .meta-icon{font-size:13px}
 
-/* SCORE CHIPS */
 .scores{display:flex;gap:10px;padding:0 36px 28px;flex-wrap:wrap}
 .score-chip{flex:1;min-width:80px;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:16px;padding:16px 14px;text-align:center;transition:all .35s ease;position:relative;overflow:hidden}
 .score-chip::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .35s ease}
-.may .score-chip::before{background:linear-gradient(135deg,var(--may-soft),transparent)}
-.jun .score-chip::before{background:linear-gradient(135deg,var(--jun-soft),transparent)}
+.fnd .score-chip::before{background:linear-gradient(135deg,var(--fnd-soft),transparent)}
 .score-chip:hover::before{opacity:1}
 .score-chip:hover{transform:translateY(-3px) scale(1.02);border-color:var(--border2)}
 .score-num{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;position:relative;z-index:1}
-.may .score-num{color:var(--may)}
-.jun .score-num{color:var(--jun)}
+.fnd .score-num{color:var(--fnd)}
 .score-label{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.4;position:relative;z-index:1}
 
-/* CARD BODY */
 .card-body{padding:0 36px 36px}
 .section+.section{margin-top:26px}
 .section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .section-icon{font-size:16px}
 .section-title{font-family:'DM Mono',monospace;font-size:18px;letter-spacing:2px;font-weight:bold;text-transform:uppercase;font-weight:500}
-.may .section-title{color:var(--may-light)}
-.jun .section-title{color:var(--jun-light)}
+.fnd .section-title{color:var(--fnd-light)}
 .section-line{flex:1;height:1px;background:var(--border)}
 
-/* FEAT LIST */
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:9px}
 .feat-list li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;color:var(--muted2);align-items:flex-start;padding:8px 12px;border-radius:10px;transition:background .25s ease,color .25s ease,transform .25s ease;cursor:default}
 .feat-list li:hover{background:rgba(255,255,255,.04);color:var(--text);transform:translateX(4px)}
 .feat-list li .icon{font-size:15px;margin-top:1px;flex-shrink:0}
 
-/* SCHEDULE */
 .schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sched-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;transition:all .3s ease}
 .sched-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s ease}
-.may .sched-card::after{background:var(--may)}
-.jun .sched-card::after{background:var(--jun)}
+.fnd .sched-card::after{background:var(--fnd)}
 .sched-card:hover::after{opacity:1}
 .sched-card:hover{transform:translateY(-3px);border-color:var(--border2)}
 .sched-time{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1}
-.may .sched-time{color:var(--may)}
-.jun .sched-time{color:var(--jun)}
+.fnd .sched-time{color:var(--fnd)}
 .sched-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
 
-/* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:2px}
 .tl-row{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;transition:background .25s ease,transform .25s ease;cursor:default}
 .tl-row:hover{background:rgba(255,255,255,.04);transform:translateX(4px)}
 .tl-badge{font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;letter-spacing:1px}
-.jun .tl-badge{background:var(--jun-soft);color:var(--jun);border:1px solid rgba(0,201,255,.2)}
+.fnd .tl-badge{background:var(--fnd-soft);color:var(--fnd);border:1px solid rgba(247,201,72,.2)}
 .tl-text{font-size:13px;color:var(--muted2)}
 
-/* CTA */
+.discount-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#e53e3e,#c53030);color:#fff;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:99px;margin-bottom:10px;position:relative;z-index:1;box-shadow:0 4px 20px rgba(229,62,62,.4)}
+
 .cta-block{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;transition:border-color .4s ease;margin-top:30px}
-.may .cta-block:hover{border-color:rgba(255,107,43,.3)}
-.jun .cta-block:hover{border-color:rgba(0,201,255,.3)}
+.fnd .cta-block:hover{border-color:rgba(247,201,72,.3)}
 .cta-block::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:300px;height:120px;filter:blur(50px);opacity:.12;transition:opacity .4s ease;pointer-events:none}
-.may .cta-block::before{background:var(--may)}
-.jun .cta-block::before{background:var(--jun)}
+.fnd .cta-block::before{background:var(--fnd)}
 .cta-block:hover::before{opacity:.25}
 .price-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:4px}
 .price{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:1;position:relative;z-index:1}
-.may .price{color:var(--may)}
-.jun .price{color:var(--jun)}
+.fnd .price{color:var(--fnd)}
 .price-currency{font-family:'DM Mono',monospace;font-size:16px;color:var(--muted);position:relative;z-index:1}
 .price-note{font-size:12px;color:var(--muted);margin-bottom:22px;position:relative;z-index:1}
 
-/* CTA BUTTON */
 .cta-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;padding:16px 36px;border-radius:99px;letter-spacing:.3px;position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;z-index:1}
 .cta-btn .btn-text{position:relative;z-index:2}
 .cta-btn .btn-icon{position:relative;z-index:2;font-size:18px;transition:transform .3s ease}
 .cta-btn:hover .btn-icon{transform:translateX(4px) rotate(10deg)}
 .cta-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s ease;border-radius:inherit}
 .cta-btn:hover::before{opacity:1}
-.may .cta-btn{background:linear-gradient(135deg,var(--may),var(--may-light));color:#fff;box-shadow:0 4px 28px rgba(255,107,43,.35)}
-.may .cta-btn::before{background:linear-gradient(135deg,var(--may-light),var(--may))}
-.may .cta-btn:hover{box-shadow:0 8px 50px rgba(255,107,43,.55);transform:scale(1.04)}
-.jun .cta-btn{background:linear-gradient(135deg,var(--jun),var(--jun-light));color:#06090f;box-shadow:0 4px 28px rgba(0,201,255,.35)}
-.jun .cta-btn::before{background:linear-gradient(135deg,var(--jun-light),var(--jun))}
-.jun .cta-btn:hover{box-shadow:0 8px 50px rgba(0,201,255,.55);transform:scale(1.04)}
+.fnd .cta-btn{background:linear-gradient(135deg,var(--fnd),var(--fnd-light));color:#06090f;box-shadow:0 4px 28px rgba(247,201,72,.35)}
+.fnd .cta-btn::before{background:linear-gradient(135deg,var(--fnd-light),var(--fnd))}
+.fnd .cta-btn:hover{box-shadow:0 8px 50px rgba(247,201,72,.55);transform:scale(1.04)}
 .cta-btn:active{transform:scale(.98) !important}
 .cta-sub{display:block;font-size:11px;color:var(--muted);margin-top:12px;position:relative;z-index:1}
 
-/* FOOTER */
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);position:relative}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:6px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:6px;background:linear-gradient(90deg,var(--fnd),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
 .footer-copy{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
 .footer-copy a{color:var(--muted2);text-decoration:none;transition:color .2s}
 .footer-copy a:hover{color:var(--text)}
 
-/* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* RESPONSIVE */
 @media(max-width:600px){
   .nav{padding:18px 20px}
   .nav-badge{display:none}
@@ -223,13 +189,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <div class="page">
 
-<!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">SAT ZONE</div>
   <div class="nav-badge">2025 · Academiya</div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">
     <span class="dot"></span>
@@ -253,44 +217,44 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <div class="section-label reveal"><h2>Guruhingizni tanlang</h2></div>
 
-<!-- GROUPS -->
 <div class="groups">
 
-  <!-- MAY -->
-  <div class="group-card may reveal">
+  <!-- FOUNDATION -->
+  <div class="group-card fnd reveal">
     <div class="card-orb"></div>
     <div class="card-topbar"></div>
     <div class="card-header">
-      <div class="group-tag">📅 2-May · Imtihon</div>
-      <div class="group-title">MAYCHILAR<br>ACADEMIYASI</div>
+      <div class="group-tag">💡 Foundation · 0 dan boshlash</div>
+      <div class="group-title">FOUNDATION<br>DASTURI</div>
       <div class="group-meta">
-        <div class="meta-item"><span class="meta-icon">🌙</span> 19:00 kechki</div>
-        <div class="meta-item"><span class="meta-icon">🌅</span> 05:15 ertalabki</div>
-        <div class="meta-item"><span class="meta-icon">📆</span> Dush–Juma</div>
+        <div class="meta-item"><span class="meta-icon">📅</span> Haftasiga 5 kun</div>
+        <div class="meta-item"><span class="meta-icon">📡</span> Jonli efirda dars</div>
       </div>
     </div>
     <div class="scores">
-      <div class="score-chip"><div class="score-num">1200+</div><div class="score-label">Umumiy<br>Grand ball</div></div>
-      <div class="score-chip"><div class="score-num">700+</div><div class="score-label">Math<br>50% ustama</div></div>
-      <div class="score-chip"><div class="score-num">780+</div><div class="score-label">YaNUU<br>Grand</div></div>
+      <div class="score-chip"><div class="score-num">0</div><div class="score-label">dan<br>boshlash</div></div>
+      <div class="score-chip"><div class="score-num">1200+</div><div class="score-label">Maqsad<br>ball</div></div>
+      <div class="score-chip"><div class="score-num">Grant</div><div class="score-label">DTMsiz<br>imkoniyat</div></div>
     </div>
     <div class="card-body">
 
       <div class="section">
         <div class="section-head"><span class="section-icon">🎯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
         <ul class="feat-list">
-          <li><span class="icon">▸</span>2-mayda SAT topshirib 1200+ olib davlat universitetlarida grant asosida o'qishni istagan barcha</li>
-          <li><span class="icon">▸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
-          <li><span class="icon">▸</span>780+ olib Yangi O'zbekiston Universitetiga Grant bilan kirmoqchi bo'lgan o'quvchilar</li>
+          <li><span class="icon">▸</span>SAT'ni 0 dan boshlamoqchi bo'lganlar</li>
+          <li><span class="icon">▸</span>Matematikasi sust yoki o'rtacha bo'lganlar</li>
+          <li><span class="icon">▸</span>1200+ natija qilib grant olishni istaganlar</li>
+          <li><span class="icon">▸</span>6-7-sinf darajasidan boshlab rivojlanmoqchi bo'lganlar</li>
         </ul>
       </div>
 
       <div class="section">
-        <div class="section-head"><span class="section-icon">📚</span><div class="section-title">Kurs davomida</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="section-icon">➗</span><div class="section-title">Matematika bo'limi</div><div class="section-line"></div></div>
         <ul class="feat-list">
-          <li><span class="icon">✦</span>Matematikani ingliz tilisiz tez va oson tushunish yo'llari o'rgatiladi</li>
-          <li><span class="icon">✦</span>Kerakli kalit so'zlar beriladi — muntazam quizlar tashkil etiladi</li>
-          <li><span class="icon">✦</span>Har kuni 800 ballik tizimda testlar + kunlik batafsil analiz</li>
+          <li><span class="icon">✦</span>Matematikani 0 dan tushuntirish</li>
+          <li><span class="icon">✦</span>Formulani yodlash emas — mantiq bilan o'rganish</li>
+          <li><span class="icon">✦</span>Savollarni tez va to'g'ri yechish</li>
+          <li><span class="icon">✦</span>Oddiy xatolardan qochish va vaqtni to'g'ri taqsimlash</li>
         </ul>
       </div>
 
@@ -301,118 +265,42 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <li><span class="icon">✓</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
           <li><span class="icon">✓</span>1200+ olgandan so'ng Agentlikka sertifikat — DTMsiz GRAND yutish</li>
           <li><span class="icon">✓</span>3 ta support teacher — har kunlik nazorat va vazifa tekshiruvi</li>
-          <li><span class="icon">✓</span>Vazifalar botiga kunlik topshiriq — qattiq nazorat ostida</li>
-          <li><span class="icon">✓</span>Har kuni 800 ballik testlar (haqiqiy imtihon bilan 1:1)</li>
         </ul>
       </div>
 
       <div class="section">
-        <div class="section-head"><span class="section-icon">🕐</span><div class="section-title">Dars jadvali</div><div class="section-line"></div></div>
-        <div class="schedule-grid">
-          <div class="sched-card"><div class="sched-time">19:00</div><div class="sched-desc">Kechki dars<br>Dush — Juma</div></div>
-          <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki dars<br>Dush — Juma</div></div>
-        </div>
-      </div>
-
-      <div class="cta-block">
-        <div class="price-row"><div class="price">329.000</div><div class="price-currency">so'm</div></div>
-        <div class="price-note">Hoziroq qo'shilsangiz — maxsus narx</div>
-        <a class="cta-btn"
-           href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%94%B6%20Maychilar%20Academiyasiga%20(2-May%20SAT)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
-           target="_blank" rel="noopener">
-          <span class="btn-text">Qo'shilish — Maychilar</span>
-          <span class="btn-icon">✈</span>
-        </a>
-        <span class="cta-sub">@satzone_admini · Telegram orqali</span>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- JUNE -->
-  <div class="group-card jun reveal">
-    <div class="card-orb"></div>
-    <div class="card-topbar"></div>
-    <div class="card-header">
-      <div class="group-tag">📅 6-Iyun · Imtihon</div>
-      <div class="group-title">IYUNCHILAR<br>ACADEMIYASI</div>
-      <div class="group-meta">
-        <div class="meta-item"><span class="meta-icon">🌙</span> 21:00 kechki</div>
-        <div class="meta-item"><span class="meta-icon">🌅</span> 05:15 ertalabki</div>
-        <div class="meta-item"><span class="meta-icon">📆</span> Dush–Juma</div>
-      </div>
-    </div>
-    <div class="scores">
-      <div class="score-chip"><div class="score-num">1200+</div><div class="score-label">Umumiy<br>Grand ball</div></div>
-      <div class="score-chip"><div class="score-num">700+</div><div class="score-label">Math<br>50% ustama</div></div>
-      <div class="score-chip"><div class="score-num">36 oy</div><div class="score-label">Ustama<br>muddati</div></div>
-    </div>
-    <div class="card-body">
-
-      <div class="section">
-        <div class="section-head"><span class="section-icon">🎯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
-        <ul class="feat-list">
-          <li><span class="icon">▸</span>6-iyunda SAT topshirib 1200+ olib universitetlarga grant bilan kirmoqchi bo'lgan barcha</li>
-          <li><span class="icon">▸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <div class="section-head"><span class="section-icon">➗</span><div class="section-title">Matematika bo'limi</div><div class="section-line"></div></div>
-        <ul class="feat-list">
-          <li><span class="icon">✦</span>Ingliz tilisiz misollarni tushunish qobiliyatini rivojlantirish</li>
-          <li><span class="icon">✦</span>Kalit so'zlar va atamalar — quizlar orqali mustahkam yodlatiladi</li>
-          <li><span class="icon">✦</span>Matematikasi pastroq o'quvchilarga qo'shimcha ustozlar biriktiriladi</li>
-          <li><span class="icon">✦</span>6-iyungacha ehtimoli baland testlar — oson va tez usullar bilan</li>
-          <li><span class="icon">✦</span>Har bir test 800 ballik tizimda baholanadi</li>
-        </ul>
-      </div>
-
-      
-      <div class="section">
-        <div class="section-head"><span class="section-icon">🗺</span><div class="section-title">O'quv rejasi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="section-icon">💡</span><div class="section-title">Foundation asosida</div><div class="section-line"></div></div>
         <div class="timeline">
-          <div class="tl-row"><div class="tl-badge">1-OY</div><div class="tl-text">To'liq Algebra bo'limi</div></div>
-          <div class="tl-row"><div class="tl-badge">2-OY · 1-HAFTA</div><div class="tl-text">Geometry bo'limi</div></div>
-          <div class="tl-row"><div class="tl-badge">2-OY · 2-HAFTA</div><div class="tl-text">Problem Solving & Data Analysis</div></div>
-          <div class="tl-row"><div class="tl-badge">YAKUNIY</div><div class="tl-text">Mock testlar · Reading · Imtihon tayyorgarligi</div></div>
+          <div class="tl-row"><div class="tl-badge">BOSHLANG'ICH</div><div class="tl-text">Matematikani 0 dan boshlab o'rganish</div></div>
+          <div class="tl-row"><div class="tl-badge">MANTIQ</div><div class="tl-text">Formulani yodlash emas — mantiq bilan tushunish</div></div>
+          <div class="tl-row"><div class="tl-badge">TEZKOR</div><div class="tl-text">Savollarni tez va to'g'ri yechish</div></div>
+          <div class="tl-row"><div class="tl-badge">NAZORAT</div><div class="tl-text">Oddiy xatolardan qochish va vaqtni taqsimlash</div></div>
         </div>
-      </div>
-
-      <div class="section">
-        <div class="section-head"><span class="section-icon">📦</span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
-        <ul class="feat-list">
-          <li><span class="icon">✓</span>Shaxsiy akkount ochib berish + SAT rasmiy ro'yxati</li>
-          <li><span class="icon">✓</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
-          <li><span class="icon">✓</span>1200+ olgandan so'ng Agentlikka sertifikat — DTMsiz GRAND yutish</li>
-          <li><span class="icon">✓</span>3 ta support teacher — har kunlik nazorat, vazifa tekshiruvi</li>
-          <li><span class="icon">✓</span>Vazifalar botiga kunlik topshiriq — qattiq nazorat</li>
-        </ul>
       </div>
 
       <div class="section">
         <div class="section-head"><span class="section-icon">🕐</span><div class="section-title">Dars jadvali</div><div class="section-line"></div></div>
         <div class="schedule-grid">
-          <div class="sched-card"><div class="sched-time">21:00</div><div class="sched-desc">Kechki dars<br>Dush — Juma</div></div>
-          <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki dars<br>Dush — Juma</div></div>
+          <div class="sched-card"><div class="sched-time">5 KUN</div><div class="sched-desc">Haftasiga<br>Dush — Juma</div></div>
+          <div class="sched-card"><div class="sched-time">JONLI</div><div class="sched-desc">Efirda dars<br>Har kuni</div></div>
         </div>
       </div>
 
       <div class="cta-block">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--jun-light);text-transform:uppercase;margin-bottom:14px;opacity:0.8">2.5 oylik kurs · Bir martalik to'lov</div>
+        <div class="discount-badge">🔥 10-APRELgacha chegirma!</div>
         <div class="price-row">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);text-decoration:line-through;letter-spacing:2px;line-height:1;position:relative;z-index:1">599.000</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);text-decoration:line-through;letter-spacing:2px;line-height:1;position:relative;z-index:1">649.000</div>
           <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);position:relative;z-index:1">so'm</div>
         </div>
         <div class="price-row" style="margin-top:4px">
-          <div class="price">497.000</div>
+          <div class="price">549.000</div>
           <div class="price-currency">so'm</div>
         </div>
-        <div class="price-note">🔥 Hozir o'tsangiz — 102.000 so'm tejaysiz</div>
+        <div class="price-note">⚡ Hozir o'tsangiz — 100.000 so'm tejaysiz</div>
         <a class="cta-btn"
-           href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%94%B5%20Iyunchilar%20Academiyasiga%20(6-Iyun%20SAT)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
+           href="https://t.me/satzone_admini?text=Salom%21%20Men%20Foundation%20Dasturiga%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
            target="_blank" rel="noopener">
-          <span class="btn-text">Qo'shilish — Iyunchilar</span>
+          <span class="btn-text">Qo'shilish — Foundation</span>
           <span class="btn-icon">✈</span>
         </a>
         <span class="cta-sub">@satzone_admini · Telegram orqali</span>
@@ -423,7 +311,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">SAT ZONE</div>
   <p class="footer-copy">© 2025 SAT Zone Academiya · <a href="https://t.me/satzone_admini" target="_blank">@satzone_admini</a></p>
@@ -432,7 +319,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </div>
 
 <script>
-// Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -447,7 +333,6 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-// 3D tilt on cards
 document.querySelectorAll('.group-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
@@ -462,9 +347,8 @@ document.querySelectorAll('.group-card').forEach(card => {
   });
 });
 
-// Counter animation
 function counter(el, target, dur, suffix) {
-  let start, isInt = Number.isInteger(target);
+  let start;
   const tick = ts => {
     if (!start) start = ts;
     const p = Math.min((ts - start) / dur, 1);
@@ -487,7 +371,6 @@ const statsObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 statsObs.observe(document.querySelector('.hero-stats'));
 
-// Ripple effect on CTA buttons
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `@keyframes rippleAnim{to{transform:scale(1);opacity:0}}`;
 document.head.appendChild(rippleStyle);
@@ -503,7 +386,6 @@ document.querySelectorAll('.cta-btn').forEach(btn => {
   });
 });
 
-// Floating particles on hero
 (function(){
   const canvas = document.createElement('canvas');
   canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.4';
@@ -518,7 +400,7 @@ document.querySelectorAll('.cta-btn').forEach(btn => {
       x: Math.random()*1920, y: Math.random()*1080,
       vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3,
       r: Math.random()*1.5+.5,
-      c: Math.random() > 0.5 ? 'rgba(255,107,43,' : 'rgba(0,201,255,'
+      c: Math.random() > 0.5 ? 'rgba(247,201,72,' : 'rgba(0,201,255,'
     });
   }
   function draw(){
