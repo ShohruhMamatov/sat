@@ -31,7 +31,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999}
- 
+
 /* BLOBS */
 .blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;animation:blobFloat 18s ease-in-out infinite}
@@ -39,15 +39,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .blob-2{width:500px;height:500px;background:var(--jun);top:-150px;right:-200px;animation-delay:-6s}
 .blob-3{width:400px;height:400px;background:var(--may-light);bottom:100px;left:30%;opacity:.08;animation-delay:-12s}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,40px) scale(.97)}}
- 
+
 .page{position:relative;z-index:1}
- 
+
 /* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(6,9,16,.7);position:sticky;top:0;z-index:100;animation:slideDown .7s ease both}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:6px 14px;border:1px solid var(--border2);border-radius:99px}
- 
+
 /* HERO */
 .hero{text-align:center;padding:100px 24px 80px;position:relative}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:7px 18px;border-radius:99px;margin-bottom:32px;animation:fadeUp .9s .1s ease both;backdrop-filter:blur(10px);background:rgba(255,255,255,.03)}
@@ -69,15 +69,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 @keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
 .scroll-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
- 
+
 /* SECTION LABEL */
 .section-label{text-align:center;padding:0 24px 48px;animation:fadeUp .9s ease both}
 .section-label h2{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:5px;color:var(--muted);text-transform:uppercase}
- 
+
 /* GROUPS */
 .groups{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1360px;margin:0 auto;padding:0 28px 100px}
 @media(max-width:900px){.groups{grid-template-columns:1fr}}
- 
+
 /* CARD */
 .group-card{background:var(--bg2);border-radius:28px;overflow:hidden;position:relative;border:1px solid var(--border);transition:border-color .4s ease,box-shadow .4s ease,transform .4s ease;cursor:default;transform-style:preserve-3d}
 .group-card.may{animation:cardReveal 1s .2s ease both}
@@ -85,17 +85,17 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 @keyframes cardReveal{from{opacity:0;transform:translateY(48px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .group-card.may:hover{border-color:rgba(255,107,43,.35);box-shadow:0 0 80px rgba(255,107,43,.12),0 40px 80px rgba(0,0,0,.4)}
 .group-card.jun:hover{border-color:rgba(0,201,255,.35);box-shadow:0 0 80px rgba(0,201,255,.12),0 40px 80px rgba(0,0,0,.4)}
- 
+
 .card-topbar{height:4px;width:100%}
 .may .card-topbar{background:linear-gradient(90deg,var(--may),var(--may-light),var(--may));background-size:200%;animation:shimmer 3s linear infinite}
 .jun .card-topbar{background:linear-gradient(90deg,var(--jun),var(--jun-light),var(--jun));background-size:200%;animation:shimmer 3s linear infinite}
 @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
- 
+
 .card-orb{position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;filter:blur(60px);opacity:0;transition:opacity .6s ease;pointer-events:none}
 .may .card-orb{background:var(--may)}
 .jun .card-orb{background:var(--jun)}
 .group-card:hover .card-orb{opacity:.15}
- 
+
 /* CARD HEADER */
 .card-header{padding:36px 36px 24px;position:relative}
 .group-tag{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px;border:1px solid transparent}
@@ -107,7 +107,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .group-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .meta-item{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
 .meta-icon{font-size:13px}
- 
+
 /* SCORE CHIPS */
 .scores{display:flex;gap:10px;padding:0 36px 28px;flex-wrap:wrap}
 .score-chip{flex:1;min-width:80px;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:16px;padding:16px 14px;text-align:center;transition:all .35s ease;position:relative;overflow:hidden}
@@ -120,7 +120,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .may .score-num{color:var(--may)}
 .jun .score-num{color:var(--jun)}
 .score-label{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.4;position:relative;z-index:1}
- 
+
 /* CARD BODY */
 .card-body{padding:0 36px 36px}
 .section+.section{margin-top:26px}
@@ -130,13 +130,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .may .section-title{color:var(--may-light)}
 .jun .section-title{color:var(--jun-light)}
 .section-line{flex:1;height:1px;background:var(--border)}
- 
+
 /* FEAT LIST */
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:9px}
 .feat-list li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;color:var(--muted2);align-items:flex-start;padding:8px 12px;border-radius:10px;transition:background .25s ease,color .25s ease,transform .25s ease;cursor:default}
 .feat-list li:hover{background:rgba(255,255,255,.04);color:var(--text);transform:translateX(4px)}
 .feat-list li .icon{font-size:15px;margin-top:1px;flex-shrink:0}
- 
+
 /* SCHEDULE */
 .schedule-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 @media(max-width:600px){.schedule-grid{grid-template-columns:1fr 1fr}}
@@ -150,7 +150,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .may .sched-time{color:var(--may)}
 .jun .sched-time{color:var(--jun)}
 .sched-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
- 
+
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:2px}
 .tl-row{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;transition:background .25s ease,transform .25s ease;cursor:default}
@@ -158,7 +158,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .tl-badge{font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;letter-spacing:1px}
 .jun .tl-badge{background:var(--jun-soft);color:var(--jun);border:1px solid rgba(0,201,255,.2)}
 .tl-text{font-size:13px;color:var(--muted2)}
- 
+
 /* CTA */
 .cta-block{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;transition:border-color .4s ease;margin-top:30px}
 .may .cta-block:hover{border-color:rgba(255,107,43,.3)}
@@ -173,7 +173,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .jun .price{color:var(--jun)}
 .price-currency{font-family:'DM Mono',monospace;font-size:16px;color:var(--muted);position:relative;z-index:1}
 .price-note{font-size:12px;color:var(--muted);margin-bottom:22px;position:relative;z-index:1}
- 
+
 /* CTA BUTTON */
 .cta-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;padding:16px 36px;border-radius:99px;letter-spacing:.3px;position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;z-index:1}
 .cta-btn .btn-text{position:relative;z-index:2}
@@ -189,18 +189,26 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .jun .cta-btn:hover{box-shadow:0 8px 50px rgba(0,201,255,.55);transform:scale(1.04)}
 .cta-btn:active{transform:scale(.98) !important}
 .cta-sub{display:block;font-size:11px;color:var(--muted);margin-top:12px;position:relative;z-index:1}
- 
+
 /* FOOTER */
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);position:relative}
 .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:6px;background:linear-gradient(90deg,var(--may),var(--jun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
 .footer-copy{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
 .footer-copy a{color:var(--muted2);text-decoration:none;transition:color .2s}
 .footer-copy a:hover{color:var(--text)}
- 
-/* SCROLL REVEAL */
+
+/* SECTION ICONS (SVG-based, no emoji) */
+.si{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;flex-shrink:0}
+.may .si{background:var(--may-soft);color:var(--may)}
+.jun .si{background:var(--jun-soft);color:var(--jun)}
+.si svg{display:block}
+/* META ICONS */
+.mi{display:inline-flex;align-items:center;justify-content:center;width:18px}
+.may .mi{color:var(--may)}
+.jun .mi{color:var(--jun)}
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
- 
+
 /* RESPONSIVE */
 @media(max-width:600px){
   .nav{padding:18px 20px}
@@ -214,21 +222,21 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </style>
 </head>
 <body>
- 
+
 <div class="blobs">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
 </div>
- 
+
 <div class="page">
- 
+
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">SAT ZONE</div>
   <div class="nav-badge">2025 Â· Academiya</div>
 </nav>
- 
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">
@@ -250,55 +258,55 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <div class="scroll-label">Pastga</div>
   </div>
 </section>
- 
+
 <div class="section-label reveal"><h2>Guruhingizni tanlang</h2></div>
- 
+
 <!-- GROUPS -->
 <div class="groups">
- 
+
   <!-- ===== CARD 1 â€” IYUNCHILAR ===== -->
   <div class="group-card may reveal">
     <div class="card-orb"></div>
     <div class="card-topbar"></div>
     <div class="card-header">
-      <div class="group-tag">ðŸ“… 6-Iyun Â· Imtihon Â· 1 oylik kurs</div>
+      <div class="group-tag">6-Iyun Â· Imtihon Â· 1 oylik kurs</div>
       <div class="group-title">IYUNCHILAR<br>AKADEMIYASI</div>
       <div class="group-meta">
-        <div class="meta-item"><span class="meta-icon">ðŸŒ…</span> 05:15</div>
-        <div class="meta-item"><span class="meta-icon">â˜€ï¸</span> 13:00</div>
-        <div class="meta-item"><span class="meta-icon">ðŸŒ™</span> 19:30</div>
-        <div class="meta-item"><span class="meta-icon">ðŸ“†</span> Dushâ€“Juma</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span> 05:15</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg></span> 13:00</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 2a10 10 0 0 0 0 20"/></svg></span> 19:30</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Dushâ€“Juma</div>
       </div>
     </div>
- 
+
     <div class="scores">
       <div class="score-chip"><div class="score-num">1</div><div class="score-label">Oylik<br>kurs</div></div>
       <div class="score-chip"><div class="score-num">3</div><div class="score-label">Mahal<br>kuniga</div></div>
       <div class="score-chip"><div class="score-num">699K</div><div class="score-label">Chegirma<br>narxi</div></div>
     </div>
- 
+
     <div class="card-body">
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸŽ¯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">â–¸</span>6-iyunda SAT topshirib 1200+ olib universitetlarga grant bilan kirmoqchi bo'lgan barcha</li>
           <li><span class="icon">â–¸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
           <li><span class="icon">â–¸</span>780+ olib Yangi O'zbekiston Universitetiga Grant bilan kirmoqchi bo'lgan o'quvchilar</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ“š</span><div class="section-title">Kurs davomida</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><div class="section-title">Kurs davomida</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">âœ¦</span>Matematikani ingliz tilisiz tez va oson tushunish yo'llari o'rgatiladi</li>
           <li><span class="icon">âœ¦</span>Kalit so'zlar va atamalar â€” quizlar orqali mustahkam yodlatiladi</li>
           <li><span class="icon">âœ¦</span>Har kuni 800 ballik tizimda testlar + kunlik batafsil analiz</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ“¦</span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">âœ“</span>Shaxsiy akkount ochib berish + SAT rasmiy ro'yxati</li>
           <li><span class="icon">âœ“</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
@@ -308,21 +316,21 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <li><span class="icon">âœ“</span>Har kuni 800 ballik testlar (haqiqiy imtihon bilan 1:1)</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ•</span><div class="section-title">Kuniga 3 mahal dars Â· Dushâ€“Juma</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div class="section-title">Kuniga 3 mahal dars Â· Dushâ€“Juma</div><div class="section-line"></div></div>
         <div class="schedule-grid">
           <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki<br>dars</div></div>
           <div class="sched-card"><div class="sched-time">13:00</div><div class="sched-desc">Kunduzgi<br>dars</div></div>
           <div class="sched-card"><div class="sched-time">19:30</div><div class="sched-desc">Kechki<br>dars</div></div>
         </div>
       </div>
- 
+
       <div class="cta-block">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--may-light);text-transform:uppercase;margin-bottom:14px;opacity:0.85">1 oylik kurs Â· Bir martalik to'lov</div>
         <!-- deadline badge -->
         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,43,0.12);border:1px solid rgba(255,107,43,0.3);border-radius:99px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:10px;color:var(--may-light);letter-spacing:1.5px;margin-bottom:16px;position:relative;z-index:1">
-          â³ Chegirma 6-maygacha
+          â—· Chegirma 6-maygacha
         </div>
         <div class="price-row">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);text-decoration:line-through;letter-spacing:2px;line-height:1;position:relative;z-index:1">897.000</div>
@@ -332,7 +340,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="price">699.000</div>
           <div class="price-currency">so'm</div>
         </div>
-        <div class="price-note">ðŸ”¥ 6-maygacha â€” 198.000 so'm tejaysiz</div>
+        <div class="price-note">&#9733; 6-maygacha â€” 198.000 so'm tejaysiz</div>
         <a class="cta-btn"
            href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%9F%A0%20Iyunchilar%20Akademiyasiga%20(6-Iyun%20SAT%2C%201%20oylik%20kurs)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
            target="_blank" rel="noopener">
@@ -341,44 +349,44 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </a>
         <span class="cta-sub">@satzone_admini Â· Telegram orqali</span>
       </div>
- 
+
     </div>
   </div>
- 
+
   <!-- ===== CARD 2 â€” AVGUSTCHILAR ===== -->
   <div class="group-card jun reveal">
     <div class="card-orb"></div>
     <div class="card-topbar"></div>
     <div class="card-header">
-      <div class="group-tag">ðŸ“… Avgust Â· Imtihon Â· 3 oylik kurs</div>
+      <div class="group-tag">Avgust Â· Imtihon Â· 3 oylik kurs</div>
       <div class="group-title">AVGUSTCHILAR<br>AKADEMIYASI</div>
       <div class="group-meta">
-        <div class="meta-item"><span class="meta-icon">ðŸŒ…</span> 05:15</div>
-        <div class="meta-item"><span class="meta-icon">â˜€ï¸</span> 13:00</div>
-        <div class="meta-item"><span class="meta-icon">ðŸŒ™</span> 21:00</div>
-        <div class="meta-item"><span class="meta-icon">ðŸ“†</span> Dushâ€“Juma</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span> 05:15</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg></span> 13:00</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 2a10 10 0 0 0 0 20"/></svg></span> 21:00</div>
+        <div class="meta-item"><span class="mi"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Dushâ€“Juma</div>
       </div>
     </div>
- 
+
     <div class="scores">
       <div class="score-chip"><div class="score-num">3</div><div class="score-label">Oylik<br>kurs</div></div>
       <div class="score-chip"><div class="score-num">3</div><div class="score-label">Mahal<br>kuniga</div></div>
       <div class="score-chip"><div class="score-num">1397K</div><div class="score-label">Chegirma<br>narxi</div></div>
     </div>
- 
+
     <div class="card-body">
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸŽ¯</span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></span><div class="section-title">Kimlar uchun?</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">â–¸</span>Avgust oyida SAT topshirib 1200+ olib universitetlarga grant bilan kirmoqchi bo'lgan barcha</li>
           <li><span class="icon">â–¸</span>Matematikadan 700+ olib 36 oy davomida 50% ustama bilan ishlashni istagan ustozlar</li>
           <li><span class="icon">â–¸</span>To'liq tayyorlanib, yuqori ball olishni maqsad qilgan o'quvchilar</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">âž—</span><div class="section-title">Matematika bo'limi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div class="section-title">Matematika bo'limi</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">âœ¦</span>Ingliz tilisiz misollarni tushunish qobiliyatini rivojlantirish</li>
           <li><span class="icon">âœ¦</span>Kalit so'zlar va atamalar â€” quizlar orqali mustahkam yodlatiladi</li>
@@ -386,18 +394,18 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <li><span class="icon">âœ¦</span>Har bir test 800 ballik tizimda baholanadi</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ“</span><div class="section-title">English bo'limi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="2" x2="22" y2="6"/><path d="M7.5 20.5 19 9l-4-4L3.5 16.5 2 22z"/></svg></span><div class="section-title">English bo'limi</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">âœ¦</span>1-oy: Writing savollarini 100% to'g'ri ishlash sirlari o'rgatiladi</li>
           <li><span class="icon">âœ¦</span>Qolgan oylar: Reading bo'limi va Mock test sessiyalari</li>
           <li><span class="icon">âœ¦</span>Har bir o'quvchi bilan individual ishlash â€” xatolar chuqur tahlil qilinadi</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ—º</span><div class="section-title">O'quv rejasi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span><div class="section-title">O'quv rejasi</div><div class="section-line"></div></div>
         <div class="timeline">
           <div class="tl-row"><div class="tl-badge">1-OY</div><div class="tl-text">To'liq Algebra bo'limi</div></div>
           <div class="tl-row"><div class="tl-badge">2-OY Â· 1-HAFTA</div><div class="tl-text">Geometry bo'limi</div></div>
@@ -405,9 +413,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="tl-row"><div class="tl-badge">3-OY</div><div class="tl-text">Mock testlar Â· Reading Â· Imtihon tayyorgarligi</div></div>
         </div>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ“¦</span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span><div class="section-title">Kurs ichiga kiradi</div><div class="section-line"></div></div>
         <ul class="feat-list">
           <li><span class="icon">âœ“</span>Shaxsiy akkount ochib berish + SAT rasmiy ro'yxati</li>
           <li><span class="icon">âœ“</span>700+ olganda Vazirlikka yuborish, ERP orqali ustama tasdiqlatish</li>
@@ -416,21 +424,21 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <li><span class="icon">âœ“</span>Vazifalar botiga kunlik topshiriq â€” qattiq nazorat</li>
         </ul>
       </div>
- 
+
       <div class="section">
-        <div class="section-head"><span class="section-icon">ðŸ•</span><div class="section-title">Kuniga 3 mahal dars Â· Dushâ€“Juma</div><div class="section-line"></div></div>
+        <div class="section-head"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div class="section-title">Kuniga 3 mahal dars Â· Dushâ€“Juma</div><div class="section-line"></div></div>
         <div class="schedule-grid">
           <div class="sched-card"><div class="sched-time">05:15</div><div class="sched-desc">Ertalabki<br>dars</div></div>
           <div class="sched-card"><div class="sched-time">13:00</div><div class="sched-desc">Kunduzgi<br>dars</div></div>
           <div class="sched-card"><div class="sched-time">21:00</div><div class="sched-desc">Kechki<br>dars</div></div>
         </div>
       </div>
- 
+
       <div class="cta-block">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--jun-light);text-transform:uppercase;margin-bottom:14px;opacity:0.85">3 oylik kurs Â· Bir martalik to'lov</div>
         <!-- deadline badge -->
         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,201,255,0.10);border:1px solid rgba(0,201,255,0.28);border-radius:99px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:10px;color:var(--jun-light);letter-spacing:1.5px;margin-bottom:16px;position:relative;z-index:1">
-          â³ Chegirma 6-maygacha
+          â—· Chegirma 6-maygacha
         </div>
         <div class="price-row">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--muted);text-decoration:line-through;letter-spacing:2px;line-height:1;position:relative;z-index:1">1.699.000</div>
@@ -440,7 +448,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="price">1.397.000</div>
           <div class="price-currency">so'm</div>
         </div>
-        <div class="price-note">ðŸ”¥ 6-maygacha â€” 302.000 so'm tejaysiz</div>
+        <div class="price-note">&#9733; 6-maygacha â€” 302.000 so'm tejaysiz</div>
         <a class="cta-btn"
            href="https://t.me/satzone_admini?text=Salom%21%20Men%20%F0%9F%94%B5%20Avgustchilar%20Akademiyasiga%20(Avgust%20SAT%2C%203%20oylik%20kurs)%20qo%27shilmoqchiman.%20Iltimos%2C%20to%27lov%20va%20ro%27yxatdan%20o%27tish%20haqida%20ma%27lumot%20bering."
            target="_blank" rel="noopener">
@@ -449,20 +457,20 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </a>
         <span class="cta-sub">@satzone_admini Â· Telegram orqali</span>
       </div>
- 
+
     </div>
   </div>
- 
+
 </div>
- 
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">SAT ZONE</div>
   <p class="footer-copy">Â© 2025 SAT Zone Academiya Â· <a href="https://t.me/satzone_admini" target="_blank">@satzone_admini</a></p>
 </footer>
- 
+
 </div>
- 
+
 <script>
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
@@ -478,7 +486,7 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
- 
+
 // 3D tilt on cards
 document.querySelectorAll('.group-card').forEach(card => {
   card.addEventListener('mousemove', e => {
@@ -493,7 +501,7 @@ document.querySelectorAll('.group-card').forEach(card => {
     card.style.transition = 'transform 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease';
   });
 });
- 
+
 // Counter animation
 function counter(el, target, dur, suffix) {
   let start, isInt = Number.isInteger(target);
@@ -506,7 +514,7 @@ function counter(el, target, dur, suffix) {
   };
   requestAnimationFrame(tick);
 }
- 
+
 const statsObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -518,12 +526,12 @@ const statsObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.5 });
 statsObs.observe(document.querySelector('.hero-stats'));
- 
+
 // Ripple effect on CTA buttons
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `@keyframes rippleAnim{to{transform:scale(1);opacity:0}}`;
 document.head.appendChild(rippleStyle);
- 
+
 document.querySelectorAll('.cta-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     const r = this.getBoundingClientRect();
@@ -534,7 +542,7 @@ document.querySelectorAll('.cta-btn').forEach(btn => {
     setTimeout(() => span.remove(), 700);
   });
 });
- 
+
 // Floating particles on hero
 (function(){
   const canvas = document.createElement('canvas');
